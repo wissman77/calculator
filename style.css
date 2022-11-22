@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: 'Oswald', sans-serif;
+}
+
+body {
+  background-color: #b0f3b0;
+}
+
+.container {
+  width: 400px;
+  margin: 10px auto;
+}
+
+header h1 {
+  text-align: center;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  border: 3px #000 solid;
+  border-radius: 10px;
+  padding: 15px;
+  width: 400px;
+  background: #bdc0bd;
+}
+
+.screen {
+  border: 2px #000 solid;
+  border-radius: 5px;
+  padding: 5px;
+  height: 100px;
+  background: #fff;
+}
+
+.screen-last {
+  height: 30px;
+  font-size: 20px;
+  text-align: right;
+}
+
+.screen-current {
+  height: 60px;
+  font-size: 40px;
+  text-align: right;
+}
+
+.clear-delete-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.btn-clear,
+.btn-delete {
+  width:48%;
+  padding: 10px;
+  background: #879bf3;
+  border: 2px solid #000;
+  border-radius: 5px;
+  font-weight: bold;
+  height: 70px;
+  font-size: 20px;
+}
+
+.btn-delete {
+  background: #f7a9a9;
+}
+
+.btn-clear:hover {
+  background-color: #b2bef5;
+}
+
+.btn-delete:hover {
+  background: #f8bdbd;
+}
+
+.digits-operation-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 24%;
+  height: 70px;
+  margin-top: 10px;
+  border: 2px #000 solid;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #b4b3b3;
+}
+
+footer {
+  text-align: center;
+  margin-top: 5px; 
+}
+
+a {
+  text-decoration: none;
+  color: #094102;
+}
