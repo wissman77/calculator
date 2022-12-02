@@ -6,7 +6,12 @@ const deleteButton = document.querySelector('.btn-delete');
 const digitButtons = document.querySelectorAll('[data-digit]');
 const operatorButtons = document.querySelectorAll('[data-operator]');
 const equalButton = document.querySelector('[data-equal]');
-const pointButton = document.querySelector('[data-point]')
+const pointButton = document.querySelector('[data-point]');
+
+// variables
+let firstNumber = '';
+let secondNumber = '';
+let currentOperation = null;
 
 
 // basic math functions
