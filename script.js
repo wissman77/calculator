@@ -1,6 +1,6 @@
 // elements selection
 const lastScreen = document.querySelector('.screen-last');
-const currentScreen = document.querySelector('.screen-last');
+const currentScreen = document.querySelector('.screen-current');
 const clearButton = document.querySelector('.btn-clear');
 const deleteButton = document.querySelector('.btn-delete');
 const digitButtons = document.querySelectorAll('[data-digit]');
@@ -24,22 +24,50 @@ const divide = (a, b) => {
 };
 
 // operate function get an operator and 2 numbers and returns the result of the operation
-const operate = (operator, firstNum, secondNum) => {
+const operate = (operator, x, y) => {
   switch (operator) {
     case '+':
-      return add(firstNum, secondNum);
-      break;
+      return add(x, y);
     case '-':
-       return subtract(firstNum, secondNum);
-      break;
+       return subtract(x, y);
     case '/':
-      return divide(firstNum, secondNum);
-      break;
+      return divide(x, y);
     case '*':
-      return multiply(firstNum, secondNum);
+      return multiply(x, y);
       break
     default:
       return 'Unknown Operator';
-      break;
   }
 };
+
+const reset = () => currentScreen.textContent = '';
+
+const addDigitToScreen = (e) => {
+  if(currentScreen.textContent === '0') reset();
+  currentScreen.textContent +=  e.target.textContent;
+};
+
+const clearScreen = () => {
+  lastScreen.textContent = '';
+  currentScreen.textContent = '0';
+  firstNumber = '';
+  secondNumber = '';
+  currentOperation = null;
+};
+
+const deleteDigit = () => {
+  if(currentScreen.textContent === '0') return;
+  if(currentScreen.textContent.length >= 1) {
+    currentScreen.textContent = currentScreen.textContent.slice(0, -1);
+  }
+  if(currentScreen.textContent === '') currentScreen.textContent = '0';
+};
+
+const addDecimalPoint = () => {
+  if(!currentScreen.textContent.includes('.')) currentScreen.textContent += '.';
+};
+
+digitButtons.forEach(btn => btn.addEventListener('click', addDigitToScreen));
+clearButton.addEventListener('click', clearScreen);
+deleteButton.addEventListener('click', deleteDigit);
+pointButton.addEventListener('click', addDecimalPoint);
