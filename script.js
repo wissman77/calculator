@@ -14,12 +14,12 @@ let secondNumber = null;
 let currentOperation = null;
 
 // basic math functions
-const add = (a, b) => (a + b);
-const subtract = (a, b) => (a - b);
-const multiply = (a, b) => (a * b);
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
 const divide = (a, b) => {
   if (b === 0) return 'Cannot divide on zero';
-  return (a / b);
+  return a / b;
 };
 
 // operate function get an operator and 2 numbers and returns the result of the operation
@@ -41,9 +41,9 @@ const operate = (operator, x, y) => {
 
 const reset = () => currentScreen.textContent = '';
 
-const addDigitToScreen = (e) => {
+const addDigitToScreen = (digit) => {
   if (currentScreen.textContent === '0' || isNotNumber(currentScreen.textContent)) reset();
-  currentScreen.textContent +=  e.target.textContent;
+  currentScreen.textContent +=  digit;
 };
 
 const clearScreen = () => {
@@ -74,24 +74,39 @@ const getAnswer = () => {
   currentOperation = null;
 }
 
-const getOperationType = (e) => {
+const getOperationType = (operator) => {
   if (isNotNumber(currentScreen.textContent)) {
     reset();
     return;
   }
-  let operationType = e.target.textContent;
   if (currentOperation !== null) getAnswer();
   firstNumber = Number(currentScreen.textContent);
-  currentOperation = operationType;
+  currentOperation = operator;
   lastScreen.textContent = `${firstNumber} ${currentOperation}`;
   currentScreen.textContent = '0';
 }
 
 const isNotNumber = (num) => isNaN(num);
 
-digitButtons.forEach(btn => btn.addEventListener('click', addDigitToScreen));
+// Keyboard handler 
+const keyboardHandler = (e) => {
+  if (e.key >= 0 && e.key <= 9) addDigitToScreen(e.key);
+  if (e.key === '.') addDecimalPoint();
+  if (e.key === '=' || e.key === 'Enter') getAnswer();
+  if (e.key === 'Backspace') deleteDigit();
+  if (e.key === 'Escape') clearScreen();
+  if (e.key === '*' ||
+      e.key === '/' ||
+      e.key === '-' ||
+      e.key === '+') getOperationType(e.key);
+}
+
+// Event Listeners
+
+digitButtons.forEach(btn => btn.addEventListener('click', () => addDigitToScreen(btn.textContent)));
 clearButton.addEventListener('click', clearScreen);
 deleteButton.addEventListener('click', deleteDigit);
 pointButton.addEventListener('click', addDecimalPoint);
-operatorButtons.forEach(btn => btn.addEventListener('click', getOperationType));
+operatorButtons.forEach(btn => btn.addEventListener('click', () => getOperationType(btn.textContent)));
 equalButton.addEventListener('click', getAnswer);
+window.addEventListener('keydown', keyboardHandler);
